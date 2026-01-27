@@ -260,10 +260,10 @@ graph LR
     end
 
     subgraph Router["Gin Router"]
-        C[/api/v1/weights]
-        D[/api/v1/weights/:id]
-        E[/api/v1/goal]
-        F[/health]
+        C["GET/POST /api/v1/weights"]
+        D["PUT/DELETE /api/v1/weights/:id"]
+        E["GET/PUT /api/v1/goal"]
+        F["GET /health"]
     end
 
     subgraph Handlers["Request Handlers"]
@@ -300,24 +300,24 @@ graph LR
 
 ```mermaid
 graph TB
-    A[Start Minikube] --> B[eval $(minikube docker-env)]
-    B --> C[Build Backend Image<br/>docker build -t weight-tracker-backend:latest]
-    B --> D[Build Frontend Image<br/>docker build -t weight-tracker-frontend:latest]
+    A[Start Minikube] --> B["Set Docker env:<br/>eval minikube docker-env"]
+    B --> C["Build Backend Image<br/>docker build backend"]
+    B --> D["Build Frontend Image<br/>docker build frontend"]
 
-    C --> E[kubectl apply -f k8s/namespace.yaml]
+    C --> E["kubectl apply namespace"]
     D --> E
 
-    E --> F[kubectl apply -f k8s/storage/]
-    F --> G[kubectl apply -f k8s/backend/]
-    G --> H[kubectl apply -f k8s/frontend/]
+    E --> F["kubectl apply storage"]
+    F --> G["kubectl apply backend"]
+    G --> H["kubectl apply frontend"]
 
     H --> I{Pods Ready?}
     I -->|No| J[Wait for readiness probes]
     J --> I
-    I -->|Yes| K[kubectl port-forward svc/frontend 3000:3000]
-    I -->|Yes| L[kubectl port-forward svc/backend 8080:8080]
+    I -->|Yes| K["Port-forward frontend:3000"]
+    I -->|Yes| L["Port-forward backend:8080"]
 
-    K --> M[Access http://localhost:3000]
+    K --> M["Access localhost:3000"]
     L --> M
 
     style A fill:#e8f5e9
