@@ -12,7 +12,7 @@ services:
       - CORS_ORIGIN=http://localhost:3000
       - GIN_MODE=release
     volumes:
-      - weight-data:/data
+      - ./data:/data
     networks:
       - weight-tracker-network
     healthcheck:
@@ -44,10 +44,6 @@ services:
         condition: service_healthy
     networks:
       - weight-tracker-network
-
-volumes:
-  weight-data:
-    driver: local
 
 networks:
   weight-tracker-network:
