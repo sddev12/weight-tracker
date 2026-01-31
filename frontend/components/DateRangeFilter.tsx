@@ -22,18 +22,18 @@ export default function DateRangeFilter({
     onRangeChange,
 }: DateRangeFilterProps) {
     return (
-        <div className="flex items-center gap-2">
-            <label htmlFor="date-range" className="text-sm font-medium text-gray-700">
-                Time period:
+        <div className="flex items-center gap-3">
+            <label htmlFor="date-range" className="text-sm font-medium text-cyan-300">
+                📅 Time period:
             </label>
             <select
                 id="date-range"
                 value={selectedRange}
                 onChange={(e) => onRangeChange(e.target.value as DateRange)}
-                className="px-3 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="px-4 py-2 bg-slate-800/50 border border-cyan-500/30 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all"
             >
                 {ranges.map((range) => (
-                    <option key={range.value} value={range.value}>
+                    <option key={range.value} value={range.value} className="bg-slate-800">
                         {range.label}
                     </option>
                 ))}

@@ -51,12 +51,12 @@ export default function WeightEntryForm({ onSuccess }: WeightEntryFormProps) {
     };
 
     return (
-        <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-semibold mb-4">Add Weight Entry</h2>
+        <div className="glass rounded-xl p-6 border border-purple-500/20">
+            <h2 className="text-xl font-semibold mb-4 text-purple-300">📊 Add Weight Entry</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
-                        <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="date" className="block text-sm font-medium text-cyan-300 mb-1">
                             Date
                         </label>
                         <input
@@ -66,11 +66,11 @@ export default function WeightEntryForm({ onSuccess }: WeightEntryFormProps) {
                             onChange={(e) => setDate(e.target.value)}
                             max={getTodayString()}
                             required
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            className="w-full px-3 py-2 bg-slate-800/50 border border-cyan-500/30 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all"
                         />
                     </div>
                     <div>
-                        <label htmlFor="stones" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="stones" className="block text-sm font-medium text-cyan-300 mb-1">
                             Stones
                         </label>
                         <input
@@ -82,11 +82,11 @@ export default function WeightEntryForm({ onSuccess }: WeightEntryFormProps) {
                             step="1"
                             placeholder="12"
                             required
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            className="w-full px-3 py-2 bg-slate-800/50 border border-cyan-500/30 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all"
                         />
                     </div>
                     <div>
-                        <label htmlFor="pounds" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="pounds" className="block text-sm font-medium text-cyan-300 mb-1">
                             Pounds
                         </label>
                         <input
@@ -99,23 +99,23 @@ export default function WeightEntryForm({ onSuccess }: WeightEntryFormProps) {
                             step="0.1"
                             placeholder="5"
                             required
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            className="w-full px-3 py-2 bg-slate-800/50 border border-cyan-500/30 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all"
                         />
                     </div>
                 </div>
 
                 {error && (
-                    <div className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-md p-3">
-                        {error}
+                    <div className="text-sm text-red-300 bg-red-900/30 border border-red-500/30 rounded-lg p-3">
+                        ⚠️ {error}
                     </div>
                 )}
 
                 <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto px-6 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                    className="w-full sm:w-auto px-6 py-2 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white rounded-lg hover:from-emerald-600 hover:to-cyan-600 disabled:from-slate-700 disabled:to-slate-700 disabled:cursor-not-allowed transition-all glow-emerald font-semibold"
                 >
-                    {isSubmitting ? 'Adding...' : 'Add Entry'}
+                    {isSubmitting ? '⏳ Adding...' : '➕ Add Entry'}
                 </button>
             </form>
         </div>

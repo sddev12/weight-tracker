@@ -36,87 +36,87 @@ export default function WeightList({ weights, unit, onUpdate }: WeightListProps)
 
     if (weights.length === 0) {
         return (
-            <div className="bg-white rounded-lg shadow p-6">
-                <h2 className="text-xl font-semibold mb-4">Weight Entries</h2>
-                <p className="text-gray-500 text-center py-8">No entries yet</p>
+            <div className="glass rounded-xl p-6 border border-cyan-500/20">
+                <h2 className="text-xl font-semibold mb-4 text-cyan-300">📋 Weight Entries</h2>
+                <p className="text-slate-400 text-center py-8">📄 No entries yet</p>
             </div>
         );
     }
 
     return (
         <>
-            <div className="bg-white rounded-lg shadow overflow-hidden">
-                <h2 className="text-xl font-semibold p-6 pb-4">Weight Entries</h2>
+            <div className="glass rounded-xl overflow-hidden border border-cyan-500/20">
+                <h2 className="text-xl font-semibold p-6 pb-4 text-cyan-300">📋 Weight Entries</h2>
                 <div className="overflow-x-auto">
-                    <table className="min-w-full divide-y divide-gray-200">
-                        <thead className="bg-gray-50">
+                    <table className="min-w-full divide-y divide-cyan-500/20">
+                        <thead className="bg-slate-800/50">
                             <tr>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th className="px-6 py-3 text-left text-xs font-medium text-cyan-300 uppercase tracking-wider">
                                     Date
                                 </th>
                                 {unit === 'imperial' ? (
                                     <>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-cyan-300 uppercase tracking-wider">
                                             Stones
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-cyan-300 uppercase tracking-wider">
                                             Pounds
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-cyan-300 uppercase tracking-wider">
                                             Decimal (st)
                                         </th>
                                     </>
                                 ) : (
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-cyan-300 uppercase tracking-wider">
                                         Weight (kg)
                                     </th>
                                 )}
-                                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th className="px-6 py-3 text-right text-xs font-medium text-cyan-300 uppercase tracking-wider">
                                     Actions
                                 </th>
                             </tr>
                         </thead>
-                        <tbody className="bg-white divide-y divide-gray-200">
+                        <tbody className="divide-y divide-cyan-500/10">
                             {weights.map((weight) => {
                                 const { stones, pounds } = poundsToStones(weight.pounds);
                                 const decimalStones = poundsToDecimalStones(weight.pounds);
                                 const kg = poundsToKg(weight.pounds);
 
                                 return (
-                                    <tr key={weight.id} className="hover:bg-gray-50">
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <tr key={weight.id} className="glass-hover transition-all">
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-200">
                                             {formatDisplayDate(weight.date)}
                                         </td>
                                         {unit === 'imperial' ? (
                                             <>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-200">
                                                     {stones}
                                                 </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-200">
                                                     {pounds.toFixed(1)}
                                                 </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-200">
                                                     {decimalStones.toFixed(2)}
                                                 </td>
                                             </>
                                         ) : (
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-200">
                                                 {kg.toFixed(2)}
                                             </td>
                                         )}
                                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <button
                                                 onClick={() => setEditingWeight(weight)}
-                                                className="text-primary-600 hover:text-primary-900 mr-4"
+                                                className="text-purple-400 hover:text-purple-300 mr-4 transition-colors"
                                             >
-                                                Edit
+                                                ✏️ Edit
                                             </button>
                                             <button
                                                 onClick={() => handleDelete(weight.id)}
                                                 disabled={deletingId === weight.id}
-                                                className="text-red-600 hover:text-red-900 disabled:opacity-50"
+                                                className="text-red-400 hover:text-red-300 disabled:opacity-50 transition-colors"
                                             >
-                                                {deletingId === weight.id ? 'Deleting...' : 'Delete'}
+                                                {deletingId === weight.id ? '⏳ Deleting...' : '🗑️ Delete'}
                                             </button>
                                         </td>
                                     </tr>

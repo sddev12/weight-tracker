@@ -84,13 +84,13 @@ export default function GoalModal({
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
-                <h2 className="text-xl font-semibold mb-4">Set Goal Weight</h2>
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div className="glass rounded-xl shadow-2xl max-w-md w-full p-6 border border-cyan-500/30 glow-cyan">
+                <h2 className="text-xl font-semibold mb-4 text-cyan-300">🎯 Set Goal Weight</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <label htmlFor="goal-stones" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="goal-stones" className="block text-sm font-medium text-cyan-300 mb-1">
                                 Stones
                             </label>
                             <input
@@ -102,11 +102,11 @@ export default function GoalModal({
                                 step="1"
                                 placeholder="12"
                                 required
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                                className="w-full px-3 py-2 bg-slate-800/50 border border-cyan-500/30 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all"
                             />
                         </div>
                         <div>
-                            <label htmlFor="goal-pounds" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="goal-pounds" className="block text-sm font-medium text-cyan-300 mb-1">
                                 Pounds
                             </label>
                             <input
@@ -119,14 +119,14 @@ export default function GoalModal({
                                 step="0.1"
                                 placeholder="5"
                                 required
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                                className="w-full px-3 py-2 bg-slate-800/50 border border-cyan-500/30 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all"
                             />
                         </div>
                     </div>
 
                     {error && (
-                        <div className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-md p-3">
-                            {error}
+                        <div className="text-sm text-red-300 bg-red-900/30 border border-red-500/30 rounded-lg p-3">
+                            ⚠️ {error}
                         </div>
                     )}
 
@@ -136,25 +136,25 @@ export default function GoalModal({
                                 type="button"
                                 onClick={handleClear}
                                 disabled={isSubmitting}
-                                className="px-4 py-2 text-red-600 hover:bg-red-50 rounded-md transition-colors disabled:opacity-50"
+                                className="px-4 py-2 text-red-400 hover:bg-red-900/30 rounded-lg transition-all disabled:opacity-50"
                             >
-                                Clear Goal
+                                🗑️ Clear Goal
                             </button>
                         )}
                         <button
                             type="button"
                             onClick={onClose}
                             disabled={isSubmitting}
-                            className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors disabled:opacity-50"
+                            className="px-4 py-2 text-slate-300 hover:bg-slate-700/50 rounded-lg transition-all disabled:opacity-50"
                         >
-                            Cancel
+                            ✖️ Cancel
                         </button>
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors disabled:opacity-50"
+                            className="px-6 py-2 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white rounded-lg hover:from-emerald-600 hover:to-cyan-600 transition-all disabled:opacity-50 glow-emerald font-semibold"
                         >
-                            {isSubmitting ? 'Saving...' : 'Save Goal'}
+                            {isSubmitting ? '⏳ Saving...' : '✓ Save Goal'}
                         </button>
                     </div>
                 </form>

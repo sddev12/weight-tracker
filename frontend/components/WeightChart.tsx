@@ -30,9 +30,9 @@ export default function WeightChart({
 }: WeightChartProps) {
     if (isLoading) {
         return (
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="glass rounded-xl p-6 border border-cyan-500/20">
                 <div className="h-96 flex items-center justify-center">
-                    <p className="text-gray-500">Loading chart...</p>
+                    <p className="text-cyan-300">⏳ Loading chart...</p>
                 </div>
             </div>
         );
@@ -40,11 +40,11 @@ export default function WeightChart({
 
     if (weights.length === 0) {
         return (
-            <div className="bg-white rounded-lg shadow p-6">
-                <h2 className="text-xl font-semibold mb-4">Weight Progress</h2>
+            <div className="glass rounded-xl p-6 border border-cyan-500/20">
+                <h2 className="text-xl font-semibold mb-4 text-cyan-300">📈 Weight Progress</h2>
                 <div className="h-96 flex items-center justify-center">
-                    <p className="text-gray-500">
-                        No weight data to display. Add your first entry to get started!
+                    <p className="text-slate-400">
+                        📊 No weight data to display. Add your first entry to get started!
                     </p>
                 </div>
             </div>
@@ -66,32 +66,36 @@ export default function WeightChart({
         : null;
 
     return (
-        <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-semibold mb-4">Weight Progress</h2>
+        <div className="glass rounded-xl p-6 border border-cyan-500/20">
+            <h2 className="text-xl font-semibold mb-4 text-cyan-300">📈 Weight Progress</h2>
             <ResponsiveContainer width="100%" height={400}>
                 <LineChart data={chartData}>
-                    <CartesianGrid strokeDasharray="3 3" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(6, 182, 212, 0.1)" />
                     <XAxis
                         dataKey="displayDate"
-                        tick={{ fontSize: 12 }}
+                        tick={{ fontSize: 12, fill: '#94a3b8' }}
+                        stroke="#475569"
                         angle={-45}
                         textAnchor="end"
                         height={80}
                     />
                     <YAxis
+                        tick={{ fill: '#94a3b8' }}
+                        stroke="#475569"
                         label={{
                             value: unit === 'metric' ? 'Weight (kg)' : 'Weight (lbs)',
                             angle: -90,
                             position: 'insideLeft',
+                            fill: '#94a3b8',
                         }}
                     />
                     <Tooltip
                         content={({ active, payload }) => {
                             if (active && payload && payload.length) {
                                 return (
-                                    <div className="bg-white p-3 border border-gray-300 rounded shadow-lg">
-                                        <p className="font-semibold">{payload[0].payload.displayDate}</p>
-                                        <p className="text-primary-600">
+                                    <div className="glass p-3 border border-cyan-500/30 rounded-lg shadow-lg">
+                                        <p className="font-semibold text-slate-200">{payload[0].payload.displayDate}</p>
+                                        <p className="text-cyan-400 font-semibold">
                                             {unit === 'metric'
                                                 ? `${Number(payload[0].value).toFixed(1)} kg`
                                                 : `${Number(payload[0].value).toFixed(1)} lbs`}
@@ -102,22 +106,23 @@ export default function WeightChart({
                             return null;
                         }}
                     />
-                    <Legend />
+                    <Legend wrapperStyle={{ color: '#94a3b8' }} />
                     {goalValue && (
                         <ReferenceLine
                             y={goalValue}
-                            stroke="#ef4444"
+                            stroke="#f59e0b"
                             strokeDasharray="5 5"
-                            label="Goal"
+                            strokeWidth={2}
+                            label={{ value: '🎯 Goal', fill: '#fbbf24', fontWeight: 'bold' }}
                         />
                     )}
                     <Line
                         type="monotone"
                         dataKey="weight"
-                        stroke="#2563eb"
-                        strokeWidth={2}
-                        dot={{ fill: '#2563eb', r: 4 }}
-                        activeDot={{ r: 6 }}
+                        stroke="#06b6d4"
+                        strokeWidth={3}
+                        dot={{ fill: '#22d3ee', r: 5, strokeWidth: 2, stroke: '#0e7490' }}
+                        activeDot={{ r: 7, fill: '#22d3ee', stroke: '#06b6d4', strokeWidth: 2 }}
                         name="Weight"
                     />
                 </LineChart>
