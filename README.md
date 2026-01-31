@@ -34,12 +34,14 @@ See [DOCKER-COMPOSE.md](DOCKER-COMPOSE.md) for detailed Docker Compose documenta
 ## Technology Stack
 
 ### Backend
+
 - **Language**: Go 1.22+
 - **Framework**: Gin web framework
 - **Database**: SQLite
 - **Testing**: Go testing with 77%+ coverage
 
 ### Frontend
+
 - **Framework**: Next.js 14+ (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
@@ -47,6 +49,7 @@ See [DOCKER-COMPOSE.md](DOCKER-COMPOSE.md) for detailed Docker Compose documenta
 - **Date Handling**: date-fns
 
 ### Infrastructure
+
 - **Local Development**: Docker Compose
 - **Production**: Kubernetes (Minikube)
 - **Container Registry**: Docker
@@ -86,6 +89,7 @@ weight-tracker/
 ## Development
 
 ### Prerequisites
+
 - Docker and Docker Compose (recommended)
 - OR Go 1.22+ and Node.js 20+ (for local development)
 
@@ -108,6 +112,7 @@ docker-compose down -v
 ### Running Locally without Docker
 
 **Backend:**
+
 ```bash
 cd backend
 go mod download
@@ -116,6 +121,7 @@ DATABASE_PATH=./weight-tracker.db go run main.go
 ```
 
 **Frontend:**
+
 ```bash
 cd frontend
 npm install
@@ -126,6 +132,7 @@ npm run dev
 ## Testing
 
 ### Backend Tests
+
 ```bash
 cd backend
 go test ./... -v
@@ -137,6 +144,7 @@ Coverage: 77%+ across handlers and database layer
 ## API Endpoints
 
 ### Weight Endpoints
+
 - `GET /api/v1/weights` - List all weight entries
 - `GET /api/v1/weights/:id` - Get single entry
 - `POST /api/v1/weights` - Create new entry
@@ -144,10 +152,12 @@ Coverage: 77%+ across handlers and database layer
 - `DELETE /api/v1/weights/:id` - Delete entry
 
 ### Goal Endpoints
+
 - `GET /api/v1/goal` - Get goal weight
 - `PUT /api/v1/goal` - Set/update goal weight
 
 ### Health Check
+
 - `GET /health` - Health status
 
 See [API Specification](specs/api-spec.md) for detailed documentation.

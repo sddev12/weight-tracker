@@ -18,6 +18,7 @@ docker-compose up -d --build
 ```
 
 The application will be available at:
+
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:8080
 - **Health Check**: http://localhost:8080/health
@@ -25,12 +26,14 @@ The application will be available at:
 ## Services
 
 ### Backend
+
 - **Port**: 8080
 - **Technology**: Go/Gin with SQLite
 - **Database**: Persistent volume at `/data/weight-tracker.db`
 - **Health Check**: Automatic health monitoring
 
 ### Frontend
+
 - **Port**: 3000
 - **Technology**: Next.js (static export) served by nginx
 - **Depends on**: Backend (waits for backend to be healthy)
@@ -77,6 +80,7 @@ docker-compose exec frontend sh
 ## Development Workflow
 
 ### First Time Setup
+
 ```bash
 # Build and start
 docker-compose up --build -d
@@ -88,18 +92,21 @@ docker-compose logs -f
 ### Making Changes
 
 **Backend changes:**
+
 ```bash
 # Rebuild backend only
 docker-compose up -d --build backend
 ```
 
 **Frontend changes:**
+
 ```bash
 # Rebuild frontend only
 docker-compose up -d --build frontend
 ```
 
 **Both:**
+
 ```bash
 # Rebuild all
 docker-compose up --build
@@ -108,6 +115,7 @@ docker-compose up --build
 ## Data Persistence
 
 The SQLite database is stored in a Docker volume named `weight-data`. This means:
+
 - Data persists across container restarts
 - Data is retained when you stop and start services
 - Data is only deleted when you run `docker-compose down -v`
@@ -135,6 +143,7 @@ docker-compose restart backend
 ## Troubleshooting
 
 ### Backend won't start
+
 ```bash
 # Check logs
 docker-compose logs backend
@@ -145,6 +154,7 @@ docker-compose logs backend
 ```
 
 ### Frontend can't connect to backend
+
 ```bash
 # Verify backend is healthy
 curl http://localhost:8080/health
@@ -154,6 +164,7 @@ docker-compose exec frontend ping backend
 ```
 
 ### Reset everything
+
 ```bash
 # Stop and remove all containers, networks, and volumes
 docker-compose down -v
@@ -163,6 +174,7 @@ docker-compose up --build
 ```
 
 ### View resource usage
+
 ```bash
 docker-compose stats
 ```
@@ -170,23 +182,27 @@ docker-compose stats
 ## Network Configuration
 
 Services communicate via the `weight-tracker-network` bridge network:
+
 - Backend is accessible to frontend via hostname `backend:8080`
 - Both services are exposed to host machine on their respective ports
 
 ## Environment Variables
 
 ### Backend
+
 - `DATABASE_PATH`: Path to SQLite database file
 - `PORT`: Server port
 - `CORS_ORIGIN`: Allowed CORS origin
 - `GIN_MODE`: Gin framework mode (release/debug)
 
 ### Frontend
+
 - `NEXT_PUBLIC_API_URL`: Backend API URL for browser requests
 
 ## Production Considerations
 
 This Docker Compose setup is designed for **local development**. For production:
+
 - Use Kubernetes (see k8s/ directory)
 - Configure proper secrets management
 - Set up SSL/TLS certificates
