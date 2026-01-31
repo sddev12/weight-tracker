@@ -12,7 +12,7 @@ import {
     ReferenceLine,
 } from 'recharts';
 import { formatDisplayDate } from '@/lib/dateUtils';
-import { poundsToKg } from '@/lib/conversions';
+import { poundsToKg, poundsToDecimalStones } from '@/lib/conversions';
 import type { Weight, Unit } from '@/lib/types';
 
 interface WeightChartProps {
@@ -56,13 +56,13 @@ export default function WeightChart({
         .map((w) => ({
             date: w.date,
             displayDate: formatDisplayDate(w.date),
-            weight: unit === 'metric' ? poundsToKg(w.pounds) : w.pounds,
+            weight: unit === 'metric' ? poundsToKg(w.pounds) : poundsToDecimalStones(w.pounds),
         }));
 
     const goalValue = goalPounds
         ? unit === 'metric'
             ? poundsToKg(goalPounds)
-            : goalPounds
+            : poundsToDecimalStones(goalPounds)
         : null;
 
     return (
@@ -83,7 +83,7 @@ export default function WeightChart({
                         tick={{ fill: '#94a3b8' }}
                         stroke="#475569"
                         label={{
-                            value: unit === 'metric' ? 'Weight (kg)' : 'Weight (lbs)',
+                            value: unit === 'metric' ? 'Weight (kg)' : 'Weight (st)',
                             angle: -90,
                             position: 'insideLeft',
                             fill: '#94a3b8',
@@ -98,7 +98,7 @@ export default function WeightChart({
                                         <p className="text-cyan-400 font-semibold">
                                             {unit === 'metric'
                                                 ? `${Number(payload[0].value).toFixed(1)} kg`
-                                                : `${Number(payload[0].value).toFixed(1)} lbs`}
+                                                : `${Number(payload[0].value).toFixed(2)} st`}
                                         </p>
                                     </div>
                                 );
