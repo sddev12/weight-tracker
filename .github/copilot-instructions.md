@@ -8,11 +8,27 @@ This is a weight tracking application designed to run locally in Minikube. It co
 
 **Before implementing any feature or making changes, always refer to the comprehensive specifications in the `/specs` directory:**
 
+### Functional Requirements
+
+- **[specs/REQUIREMENTS.md](../specs/REQUIREMENTS.md)** - Core functional requirements, user flows, business rules, and feature specifications
+  - Defines what the application should do
+  - User stories and interaction patterns
+  - Data model and calculations
+  - Validation rules and error handling
+
+### Technical Implementation Specifications
+
 - **[specs/architecture.md](../specs/architecture.md)** - System architecture, component interactions, deployment strategy, and data flow
 - **[specs/api-spec.md](../specs/api-spec.md)** - Complete REST API endpoints, request/response schemas, validation rules, and error handling
 - **[specs/database-schema.md](../specs/database-schema.md)** - SQLite database schema, table structures, indexes, and query patterns
 - **[specs/frontend-spec.md](../specs/frontend-spec.md)** - React components, UI flow, conversion logic, and styling guidelines
 - **[specs/deployment-spec.md](../specs/deployment-spec.md)** - Kubernetes manifests, Docker configurations, and deployment workflow
+- **[specs/diagrams.md](../specs/diagrams.md)** - Architecture diagrams and visual representations
+
+**How to use these specs:**
+
+1. Start with **REQUIREMENTS.md** to understand WHAT needs to be built
+2. Refer to the technical specs to understand HOW to implement it in the web application architecture
 
 ## Technology Stack
 
@@ -39,6 +55,30 @@ This is a weight tracking application designed to run locally in Minikube. It co
 
 ## Key Design Decisions
 
+### Functional Requirements (from REQUIREMENTS.md)
+
+#### Core Features
+
+- Add weight entries with date, stones, and pounds
+- View historical entries in a sortable table
+- Delete entries with confirmation
+- Visualize weight trends over time with charts
+- Display weights in multiple formats (stones/pounds, decimal stones, kilograms, total pounds)
+
+#### Data Calculations
+
+- **Total Pounds**: `(stones × 14) + pounds`
+- **Decimal Stones**: `round((total_lbs ÷ 14) × 100) ÷ 100`
+- **Kilograms**: `total_lbs × 0.45359237`
+
+#### Business Rules
+
+- Stones must be ≥ 0
+- Pounds must be ≥ 0 and < 14 (by convention)
+- Date format: ISO 8601 (YYYY-MM-DD) for storage
+- Calculated fields (total_lbs, decimal_stones, kg) are computed, not stored
+- Confirmation required before deleting entries
+
 ### Weight Storage
 
 - **Store as**: Total pounds (single REAL field in database)
@@ -60,6 +100,14 @@ This is a weight tracking application designed to run locally in Minikube. It co
 - Next.js static export (no server-side rendering needed)
 - Served by nginx on port 3000
 - API calls to backend at `http://localhost:8080/api/v1` (via port-forward)
+
+### User Interface
+
+- **Display Format**: Support both imperial (stones/pounds) and metric (kg) views
+- **Table Columns**: Date, Stones, Pounds, Total (lbs), Decimal (st), Kilograms (kg)
+- **Chart Features**: Line chart showing weight trends, min/max indicators, date range
+- **Validation**: Client-side and server-side validation for all inputs
+- **Feedback**: Clear success/error messages, confirmation dialogs for destructive actions
 
 ## Code Conventions
 
